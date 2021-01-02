@@ -1,0 +1,24 @@
+.box_wrapper{
+    margin-top: 10%;
+    width:100%;
+    height: 5%;
+    padding: 12px 20px;
+    display:flex;
+    border: 3px solid grey;
+    transition: border 0.4s;
+    align-items: center;
+    vertical-align:middle;
+}
+.box_wrapper:hover{
+    border: 3px solid lightseagreen;
+}
+.input_box{
+    font-size: 150%;
+    width:100%;
+    margin: 0px;
+    padding: 0px;
+    border: none;
+}
+.input_box:focus {
+    outline-width: 0;
+}

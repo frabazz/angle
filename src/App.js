@@ -36,6 +36,9 @@ class App extends Component{
       )
     })
   }
+  componentDidMount(){
+    document.title = "React App";
+  }
   render(){
     return (
       <div className="container">

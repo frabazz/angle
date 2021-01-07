@@ -50,7 +50,7 @@ export class RightContainer extends Component {
                     () => {
                         window.location.reload();
                     }
-                }>Pulisci</button>
+                }>Pulizzia</button>
                 <button className="confirm__button2" onClick={
                     () => {
                         var c=document.getElementById("myCanvas");

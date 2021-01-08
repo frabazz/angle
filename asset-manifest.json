@@ -1,8 +1,8 @@
 {
   "files": {
-    "main.css": "/angle/static/css/main.dcd4e2a7.chunk.css",
-    "main.js": "/angle/static/js/main.c86a3edd.chunk.js",
-    "main.js.map": "/angle/static/js/main.c86a3edd.chunk.js.map",
+    "main.css": "/angle/static/css/main.cd147501.chunk.css",
+    "main.js": "/angle/static/js/main.6628884f.chunk.js",
+    "main.js.map": "/angle/static/js/main.6628884f.chunk.js.map",
     "runtime-main.js": "/angle/static/js/runtime-main.63d4dfab.js",
     "runtime-main.js.map": "/angle/static/js/runtime-main.63d4dfab.js.map",
     "static/js/2.5ac9ae1d.chunk.js": "/angle/static/js/2.5ac9ae1d.chunk.js",
@@ -10,13 +10,13 @@
     "static/js/3.909cc534.chunk.js": "/angle/static/js/3.909cc534.chunk.js",
     "static/js/3.909cc534.chunk.js.map": "/angle/static/js/3.909cc534.chunk.js.map",
     "index.html": "/angle/index.html",
-    "static/css/main.dcd4e2a7.chunk.css.map": "/angle/static/css/main.dcd4e2a7.chunk.css.map",
+    "static/css/main.cd147501.chunk.css.map": "/angle/static/css/main.cd147501.chunk.css.map",
     "static/js/2.5ac9ae1d.chunk.js.LICENSE.txt": "/angle/static/js/2.5ac9ae1d.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.63d4dfab.js",
     "static/js/2.5ac9ae1d.chunk.js",
-    "static/css/main.dcd4e2a7.chunk.css",
-    "static/js/main.c86a3edd.chunk.js"
+    "static/css/main.cd147501.chunk.css",
+    "static/js/main.6628884f.chunk.js"
   ]
 }

@@ -13,5 +13,5 @@ oppure anche come intervalli esterni:
 
 ### x < a and x > b
 
-attenzione agli spazi
+attenzione agli spazi!
 

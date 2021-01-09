@@ -51,4 +51,4 @@ angoli = [
 ]
 for angle in angoli:
     if "*pi" in angle:
-        print("wow")
+        print("wowwww")

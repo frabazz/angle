@@ -206,5 +206,23 @@ class Layer{
             }
         }
     }
+    setTrueForExtern(a, b){
+        if(!this.Angles.includes(a) || !this.Angles.includes(b)){
+            console.log("errore, gli angoli non fanno parte del dataset, e il mio dataset è perfetto");
+        }
+        else if(a>b){
+            console.log("errore, gli angoli devono essere in ordine crescente!");
+        }
+        else{
+            var i = this.Angles.indexOf(b);
+            while(i != this.Angles.indexOf(a)){
+                if(i == this.Angles.length - 1)i = 0;
+                else{
+                    this.AnglesDict[this.Angles[i]] = true;
+                    i++;
+                }
+            }
+        } 
+    }
 }
 export default Layer;

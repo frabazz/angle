@@ -3,7 +3,7 @@ import './css/expression_box.css'
 import Fraction from "./Fraction"
 import Layer from "../utilities/Layer";
 import Drawer from "../utilities/Drawer"
-import Expressions from "../utilities/Expressions"
+import Expression from "../utilities/Expressions"
 import Fractions from "../utilities/Fractions"
 var Cookies = require("js-cookie")
 
@@ -19,16 +19,14 @@ export class ExpressionBox extends Component {
             rightTop : "",
             rightBottom : "",
             active: false,
+            type : true,
         }
         this.handlePress = this.handlePress.bind(this);
     }
-    submitExp(left, right) {
-        var l1 = new Layer();
-        var l = l1.getAngleFromString(left.replace(" ", ""));
-        var r = l1.getAngleFromString(right.replace(" ", ""));
-        console.log("exp: ", left , "value: ", l);
-        console.log("exp: ", right , "value: ", r);
-        l1.setTrueFor(l, r);
+    submitExp(exp) {
+        var l1 = exp.getLayer();
+        var left = exp.getLeft();
+        var right = exp.getRight();
         var canvas = document.getElementById('myCanvas');
         var width = canvas.width;
         var height = canvas.height;
@@ -43,10 +41,11 @@ export class ExpressionBox extends Component {
         console.log(typeof this.render());
         if(e.key == "Enter"){
             console.log("hai cliccato enter!");
-            var exp = document.getElementById("inputFormula").value;
-            var left = Expressions.getLeft(exp);
-            var right = Expressions.getRight(exp);
-            this.submitExp(left, right);
+            var expText = document.getElementById("inputFormula").value;
+            var exp = new Expression(expText);
+            var left = exp.getLeft(exp);
+            var right = exp.getRight(exp);
+            this.submitExp(exp);
             this.setState({
                 noFright: right.replace("pi", "\u03C0"),
                 noFleft: left.replace("pi", "\u03C0"),
@@ -57,6 +56,7 @@ export class ExpressionBox extends Component {
                 leftBottom :Fractions.getBottom(left),
                 rightBottom : Fractions.getBottom(right),
                 active: true,
+                type : exp.getType(),
             });
         }
     }
@@ -70,23 +70,45 @@ export class ExpressionBox extends Component {
             )
         }  
         else{
-            return(
-                <div className="box_wrapper">
-                    <Fraction 
-                    top={this.state.leftTop} 
-                    bottom={this.state.leftBottom} 
-                    isFraction={this.state.isFractionLeft}
-                    noF={this.state.noFleft}
-                    />
-                    &#60; x &#60;
-                    <Fraction 
-                    top={this.state.rightTop} 
-                    bottom={this.state.rightBottom} 
-                    isFraction={this.state.isFractionRight}
-                    noF={this.state.noFright}
-                    />
-                </div>
-            )
+            if(this.state.type == true){
+                return(
+                    <div className="box_wrapper">
+                        <Fraction 
+                        top={this.state.leftTop} 
+                        bottom={this.state.leftBottom} 
+                        isFraction={this.state.isFractionLeft}
+                        noF={this.state.noFleft}
+                        />
+                        &#60; x &#60;
+                        <Fraction 
+                        top={this.state.rightTop} 
+                        bottom={this.state.rightBottom} 
+                        isFraction={this.state.isFractionRight}
+                        noF={this.state.noFright}
+                        />
+                    </div>
+                );
+            }
+            else{
+                return(
+                    <div className="box_wrapper">
+                        x &#60; 
+                        <Fraction 
+                        top={this.state.leftTop} 
+                        bottom={this.state.leftBottom} 
+                        isFraction={this.state.isFractionLeft}
+                        noF={this.state.noFleft}
+                        />
+                        &nbsp; &#8744;  x  &#62; &nbsp;
+                        <Fraction 
+                        top={this.state.rightTop} 
+                        bottom={this.state.rightBottom} 
+                        isFraction={this.state.isFractionRight}
+                        noF={this.state.noFright}
+                        />
+                    </div>
+                );
+            }
         }
     }
 }

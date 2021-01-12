@@ -38,16 +38,16 @@ class App extends Component{
     })
   }
   componentDidMount(){
-    document.title = "React App";
+    document.title = "Angle";
   }
   render(){
+    var pippo = "pippo";
     return (
       <div className="container">
         <LeftContainer>
           <Canvas percent={70}/>
         </LeftContainer>      
         <RightContainer resultHandler = {this.writeResult.bind(this)}>
-          <ExpressionBox/>
         </RightContainer>
       </div>);
     }

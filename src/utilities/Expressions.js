@@ -4,6 +4,8 @@ class Expression{
         this.exp = exp;
         this.isFirstType = true;
         this.isSecondType = false;
+        this.isSystemIndex = this.exp.indexOf("+");
+        this.exp = this.exp.replace("+", "");
     }
     getType(exp){
         var exp = this.exp;
@@ -72,6 +74,20 @@ class Expression{
             );
         }
         return layer;
+    }
+    isSystem(){
+        var exp = this.exp;
+        if(this.isSystemIndex != -1){
+            console.log("sgamato!");
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+    getClassforComp(){
+        if(this.isSystem())return "box_wrapper2";
+        else return "box_wrapper";
     }
 
 }

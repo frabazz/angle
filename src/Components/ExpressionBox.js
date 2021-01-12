@@ -8,7 +8,6 @@ import Fractions from "../utilities/Fractions"
 var Cookies = require("js-cookie")
 
 
-
 export class ExpressionBox extends Component {
     //&#960;
     constructor(props){
@@ -24,21 +23,40 @@ export class ExpressionBox extends Component {
         this.handlePress = this.handlePress.bind(this);
     }
     submitExp(exp) {
+        var noLayer = true;
         var l1 = exp.getLayer();
         var left = exp.getLeft();
         var right = exp.getRight();
+        var expClass = exp.getClassforComp();
+        var postExp = [];
+        if(exp.isSystem())postExp = [...this.props.preExp, exp];  
         var canvas = document.getElementById('myCanvas');
         var width = canvas.width;
         var height = canvas.height;
-        Drawer.drawLayer(width/2, height/2, this.props.range, l1);
+        if(this.props.preExp.length == 0 && !exp.isSystem()){
+            noLayer = false;
+            Drawer.drawLayer(width/2, height/2, this.props.range, l1);
+        }
+        else if(this.props.preExp.length != 0 && !exp.isSystem()){
+            noLayer = false;
+            var exps = [...this.props.preExp, exp];
+            var layers = [];
+            for(var i = 0;i < exps.length;i++){
+                layers.push(exps[i].getLayer());
+            }
+            l1 = Layer.mergeLayers(layers);
+            Drawer.drawLayer(width/2, height/2, this.props.range, l1);
+        }
         this.props.updateHandler(
             l1,
             left, 
             right,
+            expClass,
+            postExp,
+            noLayer
         );
     }
     handlePress(e){
-        console.log(typeof this.render());
         if(e.key == "Enter"){
             console.log("hai cliccato enter!");
             var expText = document.getElementById("inputFormula").value;
@@ -63,7 +81,7 @@ export class ExpressionBox extends Component {
     render() {
         if(!this.state.active){
             return (
-            <div className="box_wrapper">
+            <div className={this.props.classId}>
                 <input type="text" className="input_box" id="inputFormula" onKeyDown={this.handlePress}></input>
                 
             </div>
@@ -72,7 +90,7 @@ export class ExpressionBox extends Component {
         else{
             if(this.state.type == true){
                 return(
-                    <div className="box_wrapper">
+                    <div className={this.props.classId}>
                         <Fraction 
                         top={this.state.leftTop} 
                         bottom={this.state.leftBottom} 
@@ -91,7 +109,7 @@ export class ExpressionBox extends Component {
             }
             else{
                 return(
-                    <div className="box_wrapper">
+                    <div className={this.props.classId}>
                         x &#60; 
                         <Fraction 
                         top={this.state.leftTop} 

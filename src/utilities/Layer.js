@@ -174,6 +174,19 @@ class Layer{
         }
         return result;
     }
+    static mergeLayers(Layers){
+        var resultLayer = new Layer();
+        var resultDict = resultLayer.getDict();
+        for(var i = 0;i < Layers.length;i++){
+            for(var j = 0;j < Layers[i].getList().length;j++){
+                if(Layers[i].getDict()[Layers[i].getList()[j]]){
+                    resultDict[Layers[i].getList()[j]] = true;
+                }
+            }
+        }
+        resultLayer.setDict(resultDict);
+        return resultLayer;
+    }
     getList(){
         return this.Angles;
     }
@@ -224,5 +237,6 @@ class Layer{
             }
         } 
     }
+
 }
 export default Layer;

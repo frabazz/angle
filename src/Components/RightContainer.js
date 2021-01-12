@@ -12,20 +12,20 @@ export class RightContainer extends Component {
         this.state = {
             range : 75,
             componentList : [
-                <ExpressionBox range = {75} updateHandler={this.updateHandler.bind(this)}/>
+                <ExpressionBox preExp = {[]} classId = {"box_wrapper"} range = {75} updateHandler={this.updateHandler.bind(this)}/>
             ],
             importantAngles: [],
         }
         this.updateHandler = this.updateHandler.bind(this);
     }
-    updateHandler(layer, left, right){
+    updateHandler(layer, left, right, clazzId, postExp, noLayer){
 
         this.setState({
             range : this.state.range+25,
-            componentList : [...this.state.componentList, <ExpressionBox range = {this.state.range+50} updateHandler={this.updateHandler.bind(this)}/>],
+            componentList : [...this.state.componentList, <ExpressionBox preExp = {postExp} classId = {clazzId} range = {this.state.range+50} updateHandler={this.updateHandler.bind(this)}/>],
             importantAngles : [...this.state.importantAngles, left, right]
         });
-        this.layers.push(layer);
+        if(!noLayer)this.layers.push(layer);
         
     }
     render() {
@@ -50,7 +50,7 @@ export class RightContainer extends Component {
                     () => {
                         window.location.reload();
                     }
-                }>pulizia</button>
+                }>Pulisci</button>
                 <button className="confirm__button2" onClick={
                     () => {
                         var c=document.getElementById("myCanvas");

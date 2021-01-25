@@ -1,6 +1,7 @@
 class Layer{
     constructor(){
         var pi = Math.PI;
+        this.importantAngles = [];
         this.Angles = [
             0,
             pi/12, 
@@ -147,7 +148,6 @@ class Layer{
         var result = [];
         var angleList = layer.getList();
         var angleDict = layer.getDict();
-        console.log(angleDict);
         for(var i = 0;i < angleList.length;i++){
             if(angleDict[angleList[i]]){
                 var j = 0;
@@ -187,6 +187,12 @@ class Layer{
         resultLayer.setDict(resultDict);
         return resultLayer;
     }
+    setImportantAngles(angs){
+        this.importantAngles = angs;
+    }
+    getImportantAngles(angs){
+        return this.importantAngles;
+    }
     getList(){
         return this.Angles;
     }
@@ -198,7 +204,7 @@ class Layer{
     }
     getStringFromAngle(angle){
         for(var i = 0;i < this.StringAngles.length;i++){
-            if(this.StringDict[this.StringAngles[i]] == angle)return this.StringDict[this.StringAngles[i]];
+            if(this.StringDict[this.StringAngles[i]] == angle)return this.StringAngles[i];
         }
     }
     setDict(newDict){

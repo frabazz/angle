@@ -2,7 +2,7 @@ import './App.css';
 import React, { Component } from 'react';
 import Canvas from './Components/Canvas'
 import Fraction from './Components/Fraction'
-import ExpressionBox from './Components/ExpressionBox'
+import Modal from './Components/Modal'
 import LeftContainer from './Components/LeftContainer'
 import RightContainer from './Components/RightContainer'
 import "./Components/css/container.css"
@@ -44,6 +44,7 @@ class App extends Component{
     var pippo = "pippo";
     return (
       <div className="container">
+        <Modal/>
         <LeftContainer>
           <Canvas percent={70}/>
         </LeftContainer>      

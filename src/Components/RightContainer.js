@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 import "./css/container.css"
-import ExpressionBox from "./ExpressionBox";
+import ExpressionBox from "./ExpressionBox"
 import Drawer from "../utilities/Drawer"
-import ReactDOMServer from 'react-dom/server';
+import ReactDOMServer from 'react-dom/server'
 import Layer from "../utilities/Layer"
-import Fraction from "./Fraction"
+import Trig from "../utilities/Trig"
 export class RightContainer extends Component {
     constructor(props) {
         super(props);
@@ -34,14 +34,20 @@ export class RightContainer extends Component {
                 {this.state.componentList}
                 <button className="confirm__button" onClick={
                     () => {
-                        var l = Layer.multiplyLayers(this.layers);
-                        console.log("important angles: ", this.state.importantAngles);
-                        var canvas = document.getElementById('myCanvas');
-                        var width = canvas.width;
-                        var height = canvas.height;
-                        Drawer.drawLayer(width/2, height/2, this.state.range+100, l);
-                        for(var i = 0;i < this.state.importantAngles.length;i++){
-                            Drawer.drawText(width/2, height/2, this.state.range+100, l.getAngleFromString(this.state.importantAngles[i]), this.state.importantAngles[i]);
+                        if(this.layers.length != 0){
+                            console.log(this.layers);
+                            var l = Layer.multiplyLayers(this.layers);
+                            console.log("important angles: ", this.state.importantAngles);
+                            var canvas = document.getElementById('myCanvas');
+                            var width = canvas.width;
+                            var height = canvas.height;
+                            Drawer.drawLayer(width/2, height/2, this.state.range+100, l);
+                            for(var i = 0;i < this.state.importantAngles.length;i++){
+                                Drawer.drawText(width/2, height/2, this.state.range+100, l.getAngleFromString(this.state.importantAngles[i]), this.state.importantAngles[i]);
+                            }
+                        }
+                        else{
+                            window.alert("dovresti inserire delle disequazioni prima, che dici?")
                         }
 
                     }

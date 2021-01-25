@@ -5,7 +5,7 @@ import Layer from "../utilities/Layer";
 import Drawer from "../utilities/Drawer"
 import Expression from "../utilities/Expressions"
 import Fractions from "../utilities/Fractions"
-var Cookies = require("js-cookie")
+import Trig from "../utilities/Trig"
 
 
 export class ExpressionBox extends Component {
@@ -60,22 +60,51 @@ export class ExpressionBox extends Component {
         if(e.key == "Enter"){
             console.log("hai cliccato enter!");
             var expText = document.getElementById("inputFormula").value;
-            var exp = new Expression(expText);
-            var left = exp.getLeft(exp);
-            var right = exp.getRight(exp);
-            this.submitExp(exp);
-            this.setState({
-                noFright: right.replace("pi", "\u03C0"),
-                noFleft: left.replace("pi", "\u03C0"),
-                isFractionLeft : Fractions.isFraction(left),
-                isFractionRight : Fractions.isFraction(right),
-                leftTop : Fractions.getTop(left),
-                rightTop : Fractions.getTop(right),
-                leftBottom :Fractions.getBottom(left),
-                rightBottom : Fractions.getBottom(right),
-                active: true,
-                type : exp.getType(),
-            });
+            if(expText.indexOf("cos") != -1 
+            || expText.indexOf("sin") != -1
+            || expText.indexOf("tan") != -1
+            || expText.indexOf("cotan") != -1){
+                var trigFun = "";
+                var sign = ""
+                if(expText.indexOf("cos") != -1 )trigFun = "cos";
+                else if(expText.indexOf("sin") != -1 )trigFun = "sin";
+                else if(expText.indexOf("tan") != -1 )trigFun = "tan";
+                else if(expText.indexOf("cotan") != -1 )trigFun = "cotan";
+                var sign = "";
+                if(expText.indexOf(">") != -1 )sign = ">";
+                else if(expText.indexOf(">=") != -1 )sign = ">=";
+                else if(expText.indexOf("<") != -1 )sign = "<";
+                else if(expText.indexOf("<=") != -1 )sign = "<=";
+                var number = expText.replace(sign, "").replace("(x)", "").replace(" ", "").replace(trigFun, "");
+                sign = sign.replace("=", "");
+                var canvas = document.getElementById('myCanvas');
+                var width = canvas.width;
+                var height = canvas.height;
+                if(trigFun != "tan" && trigFun != "cotan")Drawer.drawInequity(width/2, height/2, 200, Trig.getLayer(trigFun, sign, number));
+                else{
+                    document.getElementById("robbetto").innnerHTML = "Ancora tangente e cotangente non sono supportate :(";
+                    var modal = document.getElementById("myModal");
+                    modal.style.display = "block";
+                }
+            }
+            else{
+                var exp = new Expression(expText);
+                var left = exp.getLeft(exp);
+                var right = exp.getRight(exp);
+                this.submitExp(exp);
+                this.setState({
+                    noFright: right.replace("pi", "\u03C0"),
+                    noFleft: left.replace("pi", "\u03C0"),
+                    isFractionLeft : Fractions.isFraction(left),
+                    isFractionRight : Fractions.isFraction(right),
+                    leftTop : Fractions.getTop(left),
+                    rightTop : Fractions.getTop(right),
+                    leftBottom :Fractions.getBottom(left),
+                    rightBottom : Fractions.getBottom(right),
+                    active: true,
+                    type : exp.getType(),
+                });
+            }
         }
     }
     render() {
